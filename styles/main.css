@@ -59,3 +59,60 @@ footer {
     font-size: 0.9rem;
     color: #888;
 }
+/* עיצוב הלוח המרכזי */
+.mancala-board {
+    display: flex;
+    background-color: #8b4513; /* חום עץ */
+    padding: 30px;
+    border-radius: 60px;
+    gap: 20px;
+    align-items: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    border: 8px solid #5d3a1a;
+}
+
+.pits-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.row {
+    display: flex;
+    gap: 15px;
+}
+
+/* עיצוב הגומחות הקטנות */
+.pit {
+    width: 70px;
+    height: 70px;
+    background-color: #deb887; /* חום בהיר */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    box-shadow: inset 2px 4px 8px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.pit:hover {
+    transform: scale(1.1);
+    background-color: #f5deb3;
+}
+
+/* עיצוב הקופות הגדולות */
+.store {
+    width: 90px;
+    height: 180px;
+    background-color: #deb887;
+    border-radius: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    box-shadow: inset 2px 4px 10px rgba(0,0,0,0.3);
+}

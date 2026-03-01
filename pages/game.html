@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מנקלה - המשחק</title>
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <header>
+        <h1 id="game-title">משחק מנקלה</h1>
+        <div id="status-area">תור שחקן: <span id="current-player-name">טוען...</span></div>
+    </header>
+
+    <main class="game-wrapper">
+        <div class="mancala-board">
+            <div class="store" id="store-p2">0</div>
+
+            <div class="pits-container">
+                <div class="row player2-row">
+                    <div class="pit" data-index="12">4</div>
+                    <div class="pit" data-index="11">4</div>
+                    <div class="pit" data-index="10">4</div>
+                    <div class="pit" data-index="9">4</div>
+                    <div class="pit" data-index="8">4</div>
+                    <div class="pit" data-index="7">4</div>
+                </div>
+
+                <div class="row player1-row">
+                    <div class="pit" data-index="0">4</div>
+                    <div class="pit" data-index="1">4</div>
+                    <div class="pit" data-index="2">4</div>
+                    <div class="pit" data-index="3">4</div>
+                    <div class="pit" data-index="4">4</div>
+                    <div class="pit" data-index="5">4</div>
+                </div>
+            </div>
+
+            <div class="store" id="store-p1">0</div>
+        </div>
+
+        <div class="game-controls">
+            <button id="restart-btn">אתחל משחק</button>
+            <button onclick="window.location.href='../index.html'">יציאה</button>
+        </div>
+    </main>
+
+    <script src="../scripts/game.js" type="module"></script>
+</body>
+</html>
