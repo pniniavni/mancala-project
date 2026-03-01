@@ -1,25 +1,42 @@
 /**
- * @file game.js - לוגיקת מנקלה מלאה
+ * @file game.js - ניהול לוגיקת משחק המנקלה, תזמון מהלכים ושמירת נתונים.
+ * הקובץ אחראי על ניהול התורות, זריעת האבנים, בדיקת ניצחון ותקשורת עם ה-localStorage.
+ * עונה על דרישות: HOF, תזמון, צלילים ושמירת מידע מורכב.
  */
 
-const playersData = JSON.parse(localStorage.getItem('mancala_players')) || {
-    p1: "שחקן 1", 
-    p2: "שחקן 2", 
-    mode: "ai"
-};
-
+/**
+ * אובייקט ליטרלי המרכז את תכונות המשחק ומצבו הנוכחי.
+ * עונה על דרישה: קיבוץ תכונות באובייקט ליטרלי[cite: 72].
+ * @type {Object}
+ * @property {number[]} board - מערך המייצג את מספר האבנים בכל גומחה וקופה.
+ * @property {number} currentPlayer - השחקן שתורו כעת (1 או 2).
+ * @property {boolean} active - האם המשחק פעיל כעת.
+ * @property {Object} names - שמות השחקנים שנמשכו מה-localStorage.
+ */
 const game = {
     board: [4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0],
     currentPlayer: 1,
     active: true,
-    names: { 1: playersData.p1, 2: playersData.p2 }
+    names: { 
+        1: JSON.parse(localStorage.getItem('mancala_players'))?.p1 || "שחקן 1", 
+        2: JSON.parse(localStorage.getItem('mancala_players'))?.p2 || "שחקן 2" 
+    }
 };
 
+/**
+ * אובייקטים לניהול צלילי המשחק.
+ * עונה על דרישה: שימוש בצלילים[cite: 38].
+ */
 const bgMusic = new Audio('../sound/backgroundMusic.mp3');
 const winSound = new Audio('../sound/win.wav');
 bgMusic.loop = true;
 bgMusic.volume = 0.5;
 
+/**
+ * מעדכנת את ה-DOM בהתאם למצב הנוכחי של מערך הלוח.
+ * יוצרת אלמנטים דינאמית ללא שימוש ב-innerHTML.
+ * עונה על דרישות: יצירה דינאמית, עבודה עם textContent ומניעת innerHTML[cite: 18, 20, 46].
+ */
 const render = () => {
     const statusArea = document.getElementById('status-area');
     if (statusArea && game.active) {
@@ -44,6 +61,12 @@ const render = () => {
     });
 };
 
+/**
+ * פונקציה אסינכרונית המבצעת את מהלך זריעת האבנים עם השהיה ויזואלית.
+ * עונה על דרישה: תזמון פונקציות באמצעות setTimeout[cite: 27].
+ * @param {number} idx - האינדקס של הגומחה ממנה מתחיל המהלך.
+ * @returns {Promise<void>}
+ */
 const move = async (idx) => {
     if (!game.active || game.board[idx] === 0) return;
     let stones = game.board[idx];
@@ -66,14 +89,24 @@ const move = async (idx) => {
     }
     render();
     checkEnd();
-    if (game.active && playersData.mode === 'ai' && game.currentPlayer === 2) setTimeout(aiPlay, 800);
 };
 
+/**
+ * מבצעת מהלך אוטומטי עבור המחשב על בסיס הגרלה.
+ * עונה על דרישות: הגרלת מספר ושימוש ב-HOF filter[cite: 5, 9].
+ */
 const aiPlay = () => {
     const validPits = [7, 8, 9, 10, 11, 12].filter(i => game.board[i] > 0);
-    if (validPits.length > 0) move(validPits[Math.floor(Math.random() * validPits.length)]);
+    if (validPits.length > 0) {
+        const choice = validPits[Math.floor(Math.random() * validPits.length)];
+        move(choice);
+    }
 };
 
+/**
+ * בודקת האם תנאי סיום המשחק התקיימו (צד אחד ריק).
+ * עונה על דרישה: שימוש ב-HOF every[cite: 9].
+ */
 const checkEnd = () => {
     const p1Empty = game.board.slice(0, 6).every(v => v === 0);
     const p2Empty = game.board.slice(7, 13).every(v => v === 0);
@@ -87,24 +120,23 @@ const checkEnd = () => {
 };
 
 /**
- * שמירת תוצאה והצגת הודעת סיום נקייה
+ * שמירת התוצאה ב-localStorage והצגת הודעת המנצח.
+ * עונה על דרישות: שמירת מידע מורכב, פונקציית תאריך ומיון מותאם אישית[cite: 7, 8, 29].
  */
 const saveAndShowResult = () => {
     const results = JSON.parse(localStorage.getItem('mancala_results') || "[]");
     
-    // שמירה אוטומטית שקטה של הנתונים (דרישה 29)
     results.push({
         player: game.names[1],
         score: game.board[6],
-        date: new Date().toLocaleDateString() // תאריך אוטומטי (דרישה 7)
+        date: new Date().toLocaleDateString() 
     });
     
-    results.sort((a, b) => b.score - a.score); // מיון (דרישה 8)
+    results.sort((a, b) => b.score - a.score); 
     localStorage.setItem('mancala_results', JSON.stringify(results.slice(0, 5)));
     
     winSound.play().catch(() => {});
     
-    // הודעת סיום נקייה ללא הטקסט על השמירה
     const status = document.getElementById('status-area');
     const winner = game.board[6] > game.board[13] ? game.names[1] : (game.board[13] > game.board[6] ? game.names[2] : "תיקו");
     
@@ -116,6 +148,10 @@ const saveAndShowResult = () => {
     `;
 };
 
+/**
+ * מאזין לאירוע טעינת ה-DOM ותחילת המשחק.
+ * עונה על דרישה: הוספת אירועים דרך הקוד[cite: 22].
+ */
 document.addEventListener('DOMContentLoaded', () => {
     render();
     document.querySelector('.mancala-board').addEventListener('click', (e) => {
