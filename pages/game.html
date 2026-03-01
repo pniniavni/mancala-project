@@ -5,30 +5,42 @@
     <title>מנקלה - משחק</title>
     <link rel="stylesheet" href="../styles/main.css">
 </head>
-<body>
-    <header><h1>לוח מנקלה</h1></header>
-    <main class="mancala-board">
-        <div class="store" id="store-p2"></div>
-        <div class="pits-container">
-            <div class="row">
-                <div class="pit" data-index="12"><div class="stone red"></div><div class="stone blue"></div><div class="stone green"></div><div class="stone white"></div></div>
-                <div class="pit" data-index="11"><div class="stone red"></div><div class="stone blue"></div><div class="stone green"></div><div class="stone white"></div></div>
-                <div class="pit" data-index="10"><div class="stone red"></div><div class="stone blue"></div><div class="stone green"></div><div class="stone white"></div></div>
-                <div class="pit" data-index="9"><div class="stone red"></div><div class="stone blue"></div><div class="stone green"></div><div class="stone white"></div></div>
-                <div class="pit" data-index="8"><div class="stone red"></div><div class="stone blue"></div><div class="stone green"></div><div class="stone white"></div></div>
-                <div class="pit" data-index="7"><div class="stone red"></div><div class="stone blue"></div><div class="stone green"></div><div class="stone white"></div></div>
+<body class="game-page">
+    <header>
+        <h1>משחק מנקלה</h1>
+        <div id="status-area">תור שחקן: <span id="current-player-name">טוען...</span></div>
+    </header>
+
+    <main class="game-wrapper">
+        <div class="mancala-board">
+            <div class="store" id="store-p2"></div>
+
+            <div class="pits-container">
+                <div class="row">
+                    <div class="pit" data-index="12"></div>
+                    <div class="pit" data-index="11"></div>
+                    <div class="pit" data-index="10"></div>
+                    <div class="pit" data-index="9"></div>
+                    <div class="pit" data-index="8"></div>
+                    <div class="pit" data-index="7"></div>
+                </div>
+                <div class="row">
+                    <div class="pit" data-index="0"></div>
+                    <div class="pit" data-index="1"></div>
+                    <div class="pit" data-index="2"></div>
+                    <div class="pit" data-index="3"></div>
+                    <div class="pit" data-index="4"></div>
+                    <div class="pit" data-index="5"></div>
+                </div>
             </div>
-            <div class="row">
-                <div class="pit" data-index="0"><div class="stone red"></div><div class="stone blue"></div><div class="stone green"></div><div class="stone white"></div></div>
-                <div class="pit" data-index="1"><div class="stone red"></div><div class="stone blue"></div><div class="stone green"></div><div class="stone white"></div></div>
-                <div class="pit" data-index="2"><div class="stone red"></div><div class="stone blue"></div><div class="stone green"></div><div class="stone white"></div></div>
-                <div class="pit" data-index="3"><div class="stone red"></div><div class="stone blue"></div><div class="stone green"></div><div class="stone white"></div></div>
-                <div class="pit" data-index="4"><div class="stone red"></div><div class="stone blue"></div><div class="stone green"></div><div class="stone white"></div></div>
-                <div class="pit" data-index="5"><div class="stone red"></div><div class="stone blue"></div><div class="stone green"></div><div class="stone white"></div></div>
-            </div>
+
+            <div class="store" id="store-p1"></div>
         </div>
-        <div class="store" id="store-p1"></div>
-    </main>
-    <button onclick="window.location.href='../index.html'" style="margin-top: 20px;">יציאה</button>
+
+        <div class="game-controls">
+            <button onclick="window.location.href='../index.html'">יציאה</button>
+        </div>
+   </main>
+    <script src="../scripts/game.js"></script>
 </body>
 </html>
