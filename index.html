@@ -2,25 +2,67 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>מנקלה - כניסה</title>
+    <title>מנקלה - דף הבית</title>
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body class="home-page">
-    <h1 class="main-title">משחק המנקלה</h1>
-    <main class="login-container">
+    <div class="glass-container">
+        <h1 class="main-title">משחק המנקלה</h1>
+        
         <form id="login-form">
-            <input type="text" id="username" placeholder="שם שחקן" required minlength="2">
-            <select id="level">
-                <option value="human">שני שחקנים (קל)</option>
-                <option value="ai">נגד המחשב (קשה)</option>
-            </select>
+            <div class="input-group">
+                <input type="text" id="p1-name" placeholder="שם שחקן 1" required>
+                
+                <select id="level-select">
+                    <option value="ai">נגד המחשב (קשה)</option>
+                    <option value="human">נגד חבר (שני שחקנים)</option>
+                </select>
+
+                <input type="text" id="p2-name" placeholder="שם שחקן 2" style="display: none;">
+            </div>
             <button type="submit" class="start-btn">התחל משחק</button>
         </form>
-        <div class="extra-links">
-            <a href="pages/instructions.html">הוראות משחק</a> | 
-            <a href="pages/scores.html">טבלת שיאים</a>
+
+        <div class="scores-section" id="records-table">
+            <h3>🏆 טבלת שיאים 🏆</h3>
+            <table>
+                <thead>
+                    <tr><th>שחקן</th><th>שיא</th><th>תאריך</th></tr>
+                </thead>
+                <tbody id="scores-body"></tbody>
+            </table>
         </div>
-    </main>
-    <script src="scripts/main.js"></script>
+    </div>
+
+    <script>
+        // הצגת/הסתרת שם שחקן 2 לפי הבחירה
+        const levelSelect = document.getElementById('level-select');
+        const p2Input = document.getElementById('p2-name');
+        
+        levelSelect.addEventListener('change', () => {
+            p2Input.style.display = levelSelect.value === 'human' ? 'block' : 'none';
+            if (levelSelect.value === 'human') p2Input.required = true;
+            else p2Input.required = false;
+        });
+
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const data = {
+                p1: document.getElementById('p1-name').value,
+                p2: p2Input.value || "מחשב",
+                mode: levelSelect.value
+            };
+            localStorage.setItem('mancala_players', JSON.stringify(data));
+            window.location.href = 'pages/game.html';
+        });
+
+        // טעינת שיאים לטבלה
+        const results = JSON.parse(localStorage.getItem('mancala_results') || "[]");
+        const body = document.getElementById('scores-body');
+        results.forEach(res => {
+            const row = `<tr><td>${res.player}</td><td>${res.score}</td><td>${res.date}</td></tr>`;
+            body.innerHTML += row;
+        });
+    </script>
 </body>
 </html>
