@@ -1,16 +1,134 @@
-/* --- הגדרות בסיס --- */
+/* --- 1. בסיס וצבעים כלליים --- */
 body {
     font-family: 'Segoe UI', Tahoma, sans-serif;
-    background-color: #fdf5e6;
+    background-color: #fdf5e6; /* קרם עדין */
     color: #5d3a1a;
     margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     direction: rtl;
+    min-height: 100vh;
 }
 
-/* --- דף הוראות מסודר עם מספרים --- */
+h1 { color: #8b4513; margin-top: 20px; }
+
+/* --- 2. עיצוב דף הבית (גדול ומרשים) --- */
+.home-page {
+    justify-content: center;
+}
+
+.main-title {
+    font-size: 4.5rem; /* כותרת ענקית */
+    font-weight: 900;
+    color: #5d3a1a;
+    text-shadow: 2px 4px 8px rgba(139, 69, 19, 0.2);
+    margin-bottom: 20px;
+}
+
+.login-container {
+    background: #ffffff;
+    padding: 60px 80px;
+    border-radius: 40px;
+    box-shadow: 0 25px 60px rgba(139, 69, 19, 0.25);
+    border: 1px solid #deb887;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.start-btn {
+    width: 100%;
+    background-color: #8b4513;
+    color: white;
+    padding: 22px;
+    font-size: 1.5rem;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
+    transition: 0.3s;
+}
+
+.start-btn:hover {
+    background-color: #5d3a1a;
+    transform: translateY(-2px);
+}
+
+/* --- 3. לוח המשחק (מאוזן וסידור 2X2) --- */
+.mancala-board {
+    display: flex;
+    flex-direction: row; /* מחזיר את הקופות לצדדים */
+    align-items: center;
+    background-color: #8b4513;
+    padding: 40px;
+    border-radius: 65px;
+    gap: 35px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    border: 10px solid #5d3a1a;
+    margin: 20px 0;
+}
+
+.pits-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.pit {
+    width: 95px; /* רוחב מושלם ל-2 אבנים בשורה */
+    height: 95px;
+    background: radial-gradient(circle at 35% 35%, #deb887, #8b4513);
+    border-radius: 50%;
+    display: flex;
+    flex-wrap: wrap; /* שבירת שורה לאבנים */
+    justify-content: center;
+    align-content: center; /* ממרכז את ריבוע ה-4 אבנים */
+    gap: 8px;
+    padding: 10px;
+    box-shadow: inset 6px 8px 15px rgba(0,0,0,0.6);
+    cursor: pointer;
+}
+
+/* קופת הניצחון הגדולה */
+.store {
+    width: 110px;
+    height: 250px;
+    background: radial-gradient(circle at 50% 20%, #deb887, #5d3a1a);
+    border-radius: 55px;
+    box-shadow: inset 8px 12px 20px rgba(0,0,0,0.7);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start; /* אבנים נערמות מלמעלה */
+    padding: 20px;
+    gap: 5px;
+    overflow: hidden; /* מונע בריחת אבנים מהעיגול */
+}
+
+/* --- 4. עיצוב האבנים --- */
+.stone {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 1px 2px 4px rgba(0,0,0,0.4);
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.6), rgba(0,0,0,0.2));
+}
+
+.stone.red { background-color: #e74c3c; }
+.stone.blue { background-color: #3498db; }
+.stone.green { background-color: #2ecc71; }
+.stone.white { background-color: #ecf0f1; }
+
+/* --- 5. דף הוראות (מסודר עם מספרים) --- */
 .instructions-container {
     max-width: 850px;
     width: 90%;
@@ -36,11 +154,6 @@ body {
     min-width: 240px;
     border-radius: 15px;
     border: 3px solid #8b4513;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.step-content {
-    flex: 1;
 }
 
 .step-number {
@@ -53,74 +166,5 @@ body {
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    font-size: 1.2rem;
     margin-bottom: 15px;
-}
-
-/* --- לוח המשחק (סידור 2 מעל 2) --- */
-.mancala-board {
-    display: flex;
-    align-items: center;
-    background-color: #8b4513;
-    padding: 40px;
-    border-radius: 60px;
-    gap: 30px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-    border: 10px solid #5d3a1a;
-}
-
-.pit {
-    width: 95px; /* רוחב מדויק ל-2 אבנים בשורה */
-    height: 95px;
-    background: radial-gradient(circle at 35% 35%, #deb887, #8b4513);
-    border-radius: 50%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center; /* שומר על גוש האבנים במרכז */
-    gap: 8px;
-    padding: 10px;
-    box-shadow: inset 6px 8px 15px rgba(0,0,0,0.6);
-}
-
-/* --- קופת הניצחון (שומר על אבנים בפנים) --- */
-.store {
-    width: 110px;
-    height: 240px;
-    background: radial-gradient(circle at 50% 20%, #deb887, #5d3a1a);
-    border-radius: 55px;
-    box-shadow: inset 8px 12px 20px rgba(0,0,0,0.7);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: flex-start; /* אבנים מתמלאות מלמעלה למטה */
-    padding: 20px;
-    gap: 5px;
-    overflow-y: auto; /* מאפשר גלילה פנימית אם יש המון אבנים */
-}
-
-/* --- אבנים --- */
-.stone {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    box-shadow: 1px 2px 4px rgba(0,0,0,0.4);
-    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.6), rgba(0,0,0,0.2));
-}
-
-.stone.red { background-color: #e74c3c; }
-.stone.blue { background-color: #3498db; }
-.stone.green { background-color: #2ecc71; }
-.stone.white { background-color: #ecf0f1; }
-
-/* --- דף הבית המרשים --- */
-.home-page { justify-content: center; min-height: 100vh; }
-.main-title { font-size: 4.5rem; color: #5d3a1a; font-weight: 900; margin-bottom: 20px; }
-.login-container {
-    background: white; padding: 60px; border-radius: 40px;
-    box-shadow: 0 25px 60px rgba(139,69,19,0.2); width: 450px; text-align: center;
-}
-.start-btn {
-    width: 100%; background: #8b4513; color: white; padding: 20px;
-    font-size: 1.5rem; border-radius: 12px; cursor: pointer; border: none;
 }

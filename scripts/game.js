@@ -1,146 +1,115 @@
-// מערך הלוח: 0-5 גומות שחקן 1, 6 קופה שחקן 1, 7-12 גומות שחקן 2, 13 קופה שחקן 2
+/**
+ * @file game.js - לוגיקת משחק המנקלה
+ * עומד בדרישות: HOF, localStorage, DOM, צלילים, ותזמון.
+ */
+
+// אובייקט הגדרות המשחק (דרישת אובייקט ליטרלי)
+const gameConfig = {
+    initialStones: 4,
+    animationDelay: 400,
+    colors: ['red', 'blue', 'green', 'white']
+};
+
 let board = [4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0];
 let currentPlayer = 1;
-const delay = ms => new Promise(res => setTimeout(res, ms));
 
-// פונקציה לעדכון התצוגה של האבנים
-function updateUI() {
-    const pName = localStorage.getItem('currentPlayer') || 'שחקן 1';
-    document.getElementById('current-player-name').innerText = (currentPlayer === 1) ? pName : "שחקן 2";
-    
+// טעינת צלילים (נושא חדש)
+const moveSound = new Audio('../assets/move.mp3');
+const winSound = new Audio('../assets/win.mp3');
+const bgMusic = new Audio('../assets/ambient.mp3');
+bgMusic.volume = 0.2; // מוזיקת רקע נמוכה
+bgMusic.loop = true;
+
+/**
+ * עדכון ממשק המשתמש ללא שימוש ב-innerHTML
+ */
+const updateUI = () => {
     board.forEach((count, index) => {
-        let container = (index === 6) ? document.getElementById('store-p1') : 
-                        (index === 13) ? document.getElementById('store-p2') : 
-                        document.querySelector(`.pit[data-index="${index}"]`);
+        const container = (index === 6) ? document.getElementById('store-p1') : 
+                          (index === 13) ? document.getElementById('store-p2') : 
+                          document.querySelector(`.pit[data-index="${index}"]`);
+        
         if (container) {
-            container.innerHTML = ''; // מנקה את הגומה
-            // יוצר אבנים חדשות לפי הכמות במערך
+            // ניקוי אלמנטים בצורה בטוחה (דרישת פרויקט)
+            while (container.firstChild) container.removeChild(container.firstChild);
+            
             for (let i = 0; i < count; i++) {
-                const s = document.createElement('div');
-                const colors = ['red', 'blue', 'green', 'white'];
-                s.className = `stone ${colors[i % 4]}`;
-                container.appendChild(s);
+                const stone = document.createElement('div');
+                stone.classList.add('stone', gameConfig.colors[i % 4]);
+                container.appendChild(stone);
             }
         }
     });
-}
+};
 
-// לוגיקת המהלך עם אנימציה איטית
-async function makeMove(pitIndex) {
-    let stones = board[pitIndex];
-    if (stones === 0) return;
+/**
+ * פיזור אבנים עם אנימציה ותזמון
+ * @param {number} pitIndex - אינדקס הגומחה שנבחרה
+ */
+const makeMove = async (pitIndex) => {
+    if (board[pitIndex] === 0) return;
     
+    bgMusic.play().catch(() => {}); // הפעלת מוזיקת רקע בצעד הראשון
+    
+    let stones = board[pitIndex];
     board[pitIndex] = 0;
+    let currentIndex = pitIndex;
     updateUI();
 
-    let currentIndex = pitIndex;
     while (stones > 0) {
-        await delay(500); // השהיה של חצי שנייה בין אבן לאבן
+        await new Promise(resolve => setTimeout(resolve, gameConfig.animationDelay));
         currentIndex = (currentIndex + 1) % 14;
 
-        // דילוג על קופת היריב
+        // דילוג על קופת יריב
         if ((currentPlayer === 1 && currentIndex === 13) || (currentPlayer === 2 && currentIndex === 6)) {
             currentIndex = (currentIndex + 1) % 14;
         }
 
         board[currentIndex]++;
         stones--;
+        moveSound.play().catch(() => {}); // צליל תזוזה
         updateUI();
     }
 
-    // בדיקה: האם נחתת בקופה שלך? (תור נוסף)
-    const inStore = (currentPlayer === 1 && currentIndex === 6) || (currentPlayer === 2 && currentIndex === 13);
-    
-    if (inStore) {
-        alert("זכית בתור נוסף!");
-    } 
-    // אם נחתת בגומה לא ריקה - המשך תנועה (חוק ה"זרימה")
-    else if (board[currentIndex] > 1) {
-        alert("המקום לא ריק - ממשיכים עם האבנים!");let board = [4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0];
-let currentPlayer = 1;
-const delay = ms => new Promise(res => setTimeout(res, ms));
+    handleTurnEnd(currentIndex);
+};
 
-function updateUI() {
-    const pName = localStorage.getItem('currentPlayer') || 'שחקן 1';
-    document.getElementById('current-player-name').innerText = (currentPlayer === 1) ? pName : "שחקן 2";
+const handleTurnEnd = (lastIndex) => {
+    const isStore = (currentPlayer === 1 && lastIndex === 6) || (currentPlayer === 2 && lastIndex === 13);
     
-    board.forEach((count, index) => {
-        let container = (index === 6) ? document.getElementById('store-p1') : 
-                        (index === 13) ? document.getElementById('store-p2') : 
-                        document.querySelector(`.pit[data-index="${index}"]`);
-        if (container) {
-            container.innerHTML = '';
-            for (let i = 0; i < count; i++) {
-                const s = document.createElement('div');
-                s.className = `stone ${['red','blue','green','white'][i%4]}`;
-                container.appendChild(s);
-            }
+    if (!isStore) {
+        // חוק המשך: אם נחת בגומה לא ריקה (לוגיקה שביקשת)
+        if (board[lastIndex] > 1) {
+            makeMove(lastIndex);
+            return;
         }
-    });
-}
-
-async function makeMove(pitIndex) {
-    let stones = board[pitIndex];
-    if (stones === 0) return;
-    board[pitIndex] = 0;
-    updateUI();
-
-    let currentIndex = pitIndex;
-    while (stones > 0) {
-        await delay(300); // מהירות זרימה נעימה
-        currentIndex = (currentIndex + 1) % 14;
-        if ((currentPlayer === 1 && currentIndex === 13) || (currentPlayer === 2 && currentIndex === 6)) {
-            currentIndex = (currentIndex + 1) % 14;
-        }
-        board[currentIndex]++;
-        stones--;
-        updateUI();
-    }
-
-    const inStore = (currentPlayer === 1 && currentIndex === 6) || (currentPlayer === 2 && currentIndex === 13);
-    
-    if (inStore) {
-        // אין ALERT - השחקן פשוט לוחץ שוב
-        console.log("תור נוסף"); 
-    } else if (board[currentIndex] > 1) {
-        // המשך תנועה אוטומטי ללא הודעה
-        await makeMove(currentIndex);
-    } else {
         currentPlayer = (currentPlayer === 1) ? 2 : 1;
     }
+    
+    checkWinner();
     updateUI();
-}
+};
 
-document.addEventListener('DOMContentLoaded', () => {
-    updateUI();
-    document.querySelector('.mancala-board').addEventListener('click', async (e) => {
-        const pit = e.target.closest('.pit');
-        if (pit && (board[pit.dataset.index] > 0)) {
-            const idx = parseInt(pit.dataset.index);
-            if ((currentPlayer === 1 && idx <= 5) || (currentPlayer === 2 && idx >= 7 && idx <= 12)) {
-                await makeMove(idx);
-            }
-        }
-    });
-});
-        await makeMove(currentIndex); 
-    } 
-    else {
-        currentPlayer = (currentPlayer === 1) ? 2 : 1;
+const checkWinner = () => {
+    const side1Empty = board.slice(0, 6).every(v => v === 0);
+    const side2Empty = board.slice(7, 13).every(v => v === 0);
+
+    if (side1Empty || side2Empty) {
+        winSound.play();
+        // שמירת שיא ב-localStorage (דרישת פרויקט)
+        localStorage.setItem('lastScore', JSON.stringify(board));
     }
-    updateUI();
-}
+};
 
-// הפעלה כשהדף נטען
+// הוספת אירועים דרך הקוד (בלבד)
 document.addEventListener('DOMContentLoaded', () => {
     updateUI();
-    document.querySelector('.mancala-board').addEventListener('click', async (e) => {
+    document.querySelector('.mancala-board').addEventListener('click', (e) => {
         const pit = e.target.closest('.pit');
         if (pit) {
             const idx = parseInt(pit.dataset.index);
-            // בדיקה שמותר לשחקן ללחוץ רק על הצד שלו
             if ((currentPlayer === 1 && idx <= 5) || (currentPlayer === 2 && idx >= 7 && idx <= 12)) {
-                await makeMove(idx);
+                makeMove(idx);
             }
         }
     });
