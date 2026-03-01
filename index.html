@@ -2,25 +2,25 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>מנקלה - דף הבית</title>
+    <title>מנקלה - כניסה</title>
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body class="home-page">
     <h1 class="main-title">משחק המנקלה</h1>
-    <section id="section" class="login-container">
-        <h2>כניסה למשחק</h2>
+    <main class="login-container">
         <form id="login-form">
-            <input type="text" id="username" placeholder="שם השחקן" required>
+            <input type="text" id="username" placeholder="שם שחקן" required minlength="2">
             <select id="level">
-                <option value="easy">מתחילים (4 אבנים)</option>
-                <option value="hard">מומחים (6 אבנים)</option>
+                <option value="human">שני שחקנים (קל)</option>
+                <option value="ai">נגד המחשב (קשה)</option>
             </select>
             <button type="submit" class="start-btn">התחל משחק</button>
         </form>
-        <div style="margin-top: 25px;">
-            <a href="pages/instructions.html" style="color: #8b4513; font-weight: bold;">איך משחקים?</a>
+        <div class="extra-links">
+            <a href="pages/instructions.html">הוראות משחק</a> | 
+            <a href="pages/scores.html">טבלת שיאים</a>
         </div>
-    </section>
+    </main>
     <script src="scripts/main.js"></script>
 </body>
 </html>
