@@ -3,23 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>מנקלה - הוראות</title>
+    <title>מנקלה - הוראות המשחק</title>
     <link rel="stylesheet" href="../styles/main.css">
 </head>
-<body>
+<body class="instructions-page">
     <header>
-        <h1>הוראות המשחק מנקלה</h1>
+        <h1>איך משחקים מנקלה?</h1>
     </header>
-    <main id="section">
-        <article>
-            <p>מטרת המשחק היא לאסוף כמה שיותר אבנים בקופה שלך.</p>
-            <ul>
-                <li>כל שחקן בתורו בוחר גומחה ומחלק את האבנים שבה.</li>
-                <li>אם האבן האחרונה נוחתת בקופה שלך - זכית בתור נוסף!</li>
-                <li>המשחק מסתיים כשצד אחד מתרוקן מאבנים.</li>
-            </ul>
-        </article>
-        <button onclick="window.location.href='../index.html'">חזרה לדף הכניסה</button>
+
+    <main class="instructions-container">
+        <section class="instruction-step">
+            <div class="step-text">
+                <span class="step-number">1</span>
+                <p>לוח המשחק בנוי משתי עשרה גומות מקבילות (שש מול שש) ובשני הצדדים קופה. הגומה הגדולה משמאל משמשת כקופה, ושש הגומות בצד שלכם הן שלכם.</p>
+            </div>
+            <img src="../images/MANCALA01.png" alt="שלב 1 - מבנה הלוח" class="instruction-img">
+        </section>
+
+        <section class="instruction-step">
+            <div class="step-text">
+                <span class="step-number">2</span>
+                <p>בכל גומה מניחים 4 אבני משחק. בכל תור בוחרים גומה ומפזרים את האבנים נגד כיוון השעון, אבן אחת בכל גומה. אם האבן האחרונה מונחת בקופה שלכם, זכיתם בתור נוסף.</p>
+            </div>
+            <img src="../images/MANCALA02.png" alt="שלב 2 - מהלך המשחק" class="instruction-img">
+        </section>
+
+        <section class="instruction-step">
+            <div class="step-text">
+                <span class="step-number">3</span>
+                <p>אם הנחתם אבן אחרונה בגומה ריקה בצד שלכם, אתם לוקחים את כל האבנים מגומת היריב המקבילה ומניחים בקופה שלכם. המשחק מסתיים כשצד אחד נותר ללא חרוזים.</p>
+            </div>
+            <img src="../images/MANCALA03.png" alt="שלב 3 - סיום המשחק" class="instruction-img">
+        </section>
+
+        <div class="actions">
+            <button onclick="window.location.href='../index.html'">חזרה לדף הכניסה</button>
+        </div>
     </main>
 </body>
 </html>

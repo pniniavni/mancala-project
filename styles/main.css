@@ -116,3 +116,48 @@ footer {
     font-weight: bold;
     box-shadow: inset 2px 4px 10px rgba(0,0,0,0.3);
 }
+/* עיצוב דף ההוראות עם התמונות */
+.instructions-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.instruction-step {
+    display: flex;
+    align-items: center;
+    background: white;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-right: 5px solid #8b4513; /* פס חום בצד */
+    gap: 20px;
+}
+
+.step-number {
+    background-color: #8b4513;
+    color: white;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.instruction-img {
+    width: 250px;
+    border-radius: 10px;
+    border: 2px solid #deb887;
+}
+
+/* התאמה לניידים */
+@media (max-width: 600px) {
+    .instruction-step {
+        flex-direction: column;
+        text-align: center;
+    }
+}
