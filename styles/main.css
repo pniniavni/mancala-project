@@ -1,163 +1,97 @@
-
+/* --- בסיס וצבעים (קרם ובז') --- */
 body {
-    background-color: #f0e6d2; 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: #fdf5e6; /* קרם עדין */
+    color: #5d3a1a;
+    margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
+    direction: rtl;
 }
 
-header h1 {
-    color: #5d3a1a; 
-    font-size: 3rem;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-}
+h1 { color: #8b4513; margin-top: 20px; }
 
-
-#section {
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    border-top: 5px solid #8b4513; /* פס חום למעלה */
-    text-align: center;
-}
-
-#login-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-input, select {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-}
-
+/* --- כפתורים --- */
 button {
     background-color: #8b4513;
     color: white;
-    padding: 12px;
     border: none;
-    border-radius: 5px;
-    font-size: 1.1rem;
+    padding: 12px 24px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: 0.3s;
 }
 
-button:hover {
-    background-color: #5d3a1a;
-}
+button:hover { background-color: #5d3a1a; }
 
-footer {
-    margin-top: 20px;
-    font-size: 0.9rem;
-    color: #888;
-}
-/* עיצוב הלוח המרכזי */
+/* --- לוח המשחק --- */
 .mancala-board {
     display: flex;
-    background-color: #8b4513; /* חום עץ */
-    padding: 30px;
+    align-items: center;
+    background-color: #8b4513;
+    padding: 40px;
     border-radius: 60px;
-    gap: 20px;
-    align-items: center;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-    border: 8px solid #5d3a1a;
+    gap: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
 }
 
-.pits-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
+.pits-container { display: flex; flex-direction: column; gap: 20px; }
+.row { display: flex; gap: 15px; }
 
-.row {
-    display: flex;
-    gap: 15px;
-}
-
-/* עיצוב הגומחות הקטנות */
 .pit {
-    width: 70px;
-    height: 70px;
-    background-color: #deb887; /* חום בהיר */
+    width: 75px; height: 75px;
+    background: radial-gradient(circle at 35% 35%, #deb887, #8b4513);
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    font-weight: bold;
-    box-shadow: inset 2px 4px 8px rgba(0,0,0,0.3);
-    cursor: pointer;
-    transition: transform 0.2s;
+    display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+    box-shadow: inset 5px 5px 10px rgba(0,0,0,0.5);
 }
 
-.pit:hover {
-    transform: scale(1.1);
-    background-color: #f5deb3;
-}
-
-/* עיצוב הקופות הגדולות */
 .store {
-    width: 90px;
-    height: 180px;
-    background-color: #deb887;
+    width: 90px; height: 180px;
+    background: radial-gradient(circle at 50% 20%, #deb887, #5d3a1a);
     border-radius: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    font-weight: bold;
-    box-shadow: inset 2px 4px 10px rgba(0,0,0,0.3);
+    box-shadow: inset 6px 6px 12px rgba(0,0,0,0.6);
 }
-/* עיצוב דף ההוראות עם התמונות */
+
+/* --- אבנים --- */
+.stone {
+    width: 16px; height: 16px; border-radius: 50%; margin: 2px;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+.stone.red { background: radial-gradient(circle at 30% 30%, #ff6b6b, #c0392b); }
+.stone.blue { background: radial-gradient(circle at 30% 30%, #4facfe, #003a8c); }
+.stone.green { background: radial-gradient(circle at 30% 30%, #b8e994, #388e3c); }
+.stone.white { background: radial-gradient(circle at 30% 30%, #ffffff, #dcdde1); }
+
+/* --- דף הוראות מיושר --- */
 .instructions-container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
+    max-width: 800px; width: 90%;
 }
 
 .instruction-step {
     display: flex;
     align-items: center;
-    background: white;
+    background: #fffaf0; /* בז' בהיר */
     margin-bottom: 20px;
     padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    border-right: 5px solid #8b4513; /* פס חום בצד */
-    gap: 20px;
-}
-
-.step-number {
-    background-color: #8b4513;
-    color: white;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    font-weight: bold;
-    margin-bottom: 10px;
+    border-radius: 12px;
+    border-right: 8px solid #8b4513; /* פס חום מיישר */
+    gap: 25px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
 .instruction-img {
-    width: 250px;
-    border-radius: 10px;
+    width: 220px; min-width: 220px; /* שומר על קו ישר */
+    border-radius: 8px;
     border: 2px solid #deb887;
 }
 
-/* התאמה לניידים */
-@media (max-width: 600px) {
-    .instruction-step {
-        flex-direction: column;
-        text-align: center;
-    }
+.step-content { flex: 1; }
+
+.step-number {
+    background: #8b4513; color: white;
+    width: 30px; height: 30px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: bold; margin-bottom: 10px;
 }

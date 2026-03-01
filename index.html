@@ -3,32 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>מנקלה - דף כניסה</title>
- <link rel="stylesheet" href="styles/main.css">
+    <title>מנקלה - דף כניסה</title>
+    <link rel="stylesheet" href="styles/main.css">
 </head>
-<body>
+<body class="home-page">
     <header>
-        <h1>ברוכים הבאים למשחק מנקלה!</h1>
+        <h1 class="main-title">משחק המנקלה</h1>
+        <p class="subtitle">אסטרטגיה עתיקה באריזה מודרנית</p>
     </header>
+    
     <main>
-        <section id="section">
-        <h2>הרשמה למשחק</h2>
-     <form id="login-form">
-        <input type="text" id="username" placeholder="הכנס שם משתמש" required>
-        <label for="level">בחר רמת קושי:</label>
-        <select id="level">
-        <option value="easy">קל (4 אבנים בכל גומחה)</option>
-        <option value="hard">קשה (6 אבנים בכל גומחה)</option>
-        </select>
-  <button type="submit">התחל משחק</button>
-      </form>
-      </section>
+        <section id="section" class="login-container">
+            <h2>כניסה לשחקנים</h2>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="username">שם השחקן:</label>
+                    <input type="text" id="username" placeholder="הקלידו שם כאן..." required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="level">רמת קושי:</label>
+                    <select id="level">
+                        <option value="easy">מתחילים (4 אבנים)</option>
+                        <option value="hard">מקצוענים (6 אבנים)</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="start-btn">התחל משחק</button>
+            </form>
+            
+            <div class="extra-links">
+                <a href="pages/instructions.html" class="instr-link">איך משחקים? (הוראות)</a>
+            </div>
+        </section>
     </main>
-    <a href="pages/instructions.html">לקריאת הוראות המשחק</a>
+
     <footer>
-        <p>כל הזכויות שמורות לפרויקט מנקלה</p>
+        <p>מנקלה - פרויקט פיתוח 2026</p>
     </footer>
-   <script src="scripts/main.js"></script>
- 
+    
+    <script src="scripts/main.js"></script>
 </body>
 </html>
