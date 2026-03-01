@@ -1,4 +1,4 @@
-/* --- בסיס וצבעים (קרם ובז') --- */
+/* --- בסיס וצבעי קרם-חום --- */
 body {
     font-family: 'Segoe UI', Tahoma, sans-serif;
     background-color: #fdf5e6; /* קרם עדין */
@@ -8,90 +8,120 @@ body {
     flex-direction: column;
     align-items: center;
     direction: rtl;
+    min-height: 100vh;
 }
 
-h1 { color: #8b4513; margin-top: 20px; }
+/* --- דף הבית המרשים --- */
+.home-page {
+    justify-content: center;
+}
 
-/* --- כפתורים --- */
-button {
+.main-title {
+    font-size: 4rem; /* כותרת גדולה ומרשימה */
+    color: #5d3a1a;
+    margin-bottom: 10px;
+    font-weight: 900;
+}
+
+.login-container {
+    background: #ffffff;
+    padding: 60px 80px; /* מרחב פנימי גדול */
+    border-radius: 40px;
+    box-shadow: 0 25px 60px rgba(139, 69, 19, 0.2);
+    border: 1px solid #deb887;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.login-container input, .login-container select {
+    width: 100%;
+    padding: 18px;
+    margin: 15px 0;
+    border: 2px solid #f5f5dc;
+    border-radius: 15px;
+    font-size: 1.2rem;
+    background-color: #fffaf0;
+}
+
+.start-btn {
+    width: 100%;
     background-color: #8b4513;
     color: white;
+    padding: 20px;
+    font-size: 1.4rem;
     border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
+    border-radius: 12px;
     cursor: pointer;
-    transition: 0.3s;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(139, 69, 19, 0.3);
 }
 
-button:hover { background-color: #5d3a1a; }
-
-/* --- לוח המשחק --- */
+/* --- לוח המשחק (סידור 2 מעל 2) --- */
 .mancala-board {
     display: flex;
     align-items: center;
     background-color: #8b4513;
-    padding: 40px;
-    border-radius: 60px;
-    gap: 30px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    padding: 45px;
+    border-radius: 65px;
+    gap: 35px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    border: 10px solid #5d3a1a;
 }
 
-.pits-container { display: flex; flex-direction: column; gap: 20px; }
-.row { display: flex; gap: 15px; }
-
+.pits-container { display: flex; flex-direction: column; gap: 30px; }
+.row { display: flex; gap: 20px; }
 .pit {
-    width: 75px; height: 75px;
+    width: 85px;  /* צמצמנו מעט כדי "לסגור" על האבנים */
+    height: 85px;
     background: radial-gradient(circle at 35% 35%, #deb887, #8b4513);
     border-radius: 50%;
-    display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
-    box-shadow: inset 5px 5px 10px rgba(0,0,0,0.5);
+    display: flex;
+    flex-wrap: wrap; /* מאפשר לאבנים לרדת שורה */
+    justify-content: center; /* ממרכז אופקית */
+    align-content: center;   /* ממרכז את כל הריבוע אנכית */
+    gap: 6px; /* רווח מדויק בין האבנים */
+    padding: 10px;
+    box-shadow: inset 6px 8px 15px rgba(0,0,0,0.6);
+    cursor: pointer;
 }
-
 .store {
-    width: 90px; height: 180px;
+    width: 100px;
+    height: 230px;
     background: radial-gradient(circle at 50% 20%, #deb887, #5d3a1a);
-    border-radius: 45px;
-    box-shadow: inset 6px 6px 12px rgba(0,0,0,0.6);
+    border-radius: 55px;
+    box-shadow: inset 8px 12px 20px rgba(0,0,0,0.7);
 }
 
-/* --- אבנים --- */
+/* --- האבנים (2 מעל 2) --- */
 .stone {
-    width: 16px; height: 16px; border-radius: 50%; margin: 2px;
-    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-}
-.stone.red { background: radial-gradient(circle at 30% 30%, #ff6b6b, #c0392b); }
-.stone.blue { background: radial-gradient(circle at 30% 30%, #4facfe, #003a8c); }
-.stone.green { background: radial-gradient(circle at 30% 30%, #b8e994, #388e3c); }
-.stone.white { background: radial-gradient(circle at 30% 30%, #ffffff, #dcdde1); }
-
-/* --- דף הוראות מיושר --- */
-.instructions-container {
-    max-width: 800px; width: 90%;
+    width: 25px; /* הגודל המושלם כדי שייכנסו בדיוק 2 בשורה של 85px */
+    height: 25px;
+    border-radius: 50%;
+    box-shadow: 1px 2px 4px rgba(0,0,0,0.4);
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.6), rgba(0,0,0,0.2));
+    flex-shrink: 0; /* מונע מהאבנים להתכווץ */
 }
 
+.stone.red { background-color: #e74c3c; }
+.stone.blue { background-color: #3498db; }
+.stone.green { background-color: #2ecc71; }
+.stone.white { background-color: #ecf0f1; }
+
+/* --- דף הוראות --- */
 .instruction-step {
     display: flex;
     align-items: center;
-    background: #fffaf0; /* בז' בהיר */
+    background: white;
     margin-bottom: 20px;
-    padding: 20px;
-    border-radius: 12px;
-    border-right: 8px solid #8b4513; /* פס חום מיישר */
-    gap: 25px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    padding: 25px;
+    border-radius: 15px;
+    border-right: 8px solid #8b4513; /* פס מיישר */
+    gap: 30px;
 }
 
 .instruction-img {
-    width: 220px; min-width: 220px; /* שומר על קו ישר */
-    border-radius: 8px;
-    border: 2px solid #deb887;
-}
-
-.step-content { flex: 1; }
-
-.step-number {
-    background: #8b4513; color: white;
-    width: 30px; height: 30px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: bold; margin-bottom: 10px;
+    width: 250px;
+    min-width: 250px; /* שומר על קו ישר לכל התמונות */
+    border-radius: 10px;
 }

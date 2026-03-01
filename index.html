@@ -2,46 +2,25 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>מנקלה - דף כניסה</title>
+    <title>מנקלה - דף הבית</title>
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body class="home-page">
-    <header>
-        <h1 class="main-title">משחק המנקלה</h1>
-        <p class="subtitle">אסטרטגיה עתיקה באריזה מודרנית</p>
-    </header>
-    
-    <main>
-        <section id="section" class="login-container">
-            <h2>כניסה לשחקנים</h2>
-            <form id="login-form">
-                <div class="input-group">
-                    <label for="username">שם השחקן:</label>
-                    <input type="text" id="username" placeholder="הקלידו שם כאן..." required>
-                </div>
-                
-                <div class="input-group">
-                    <label for="level">רמת קושי:</label>
-                    <select id="level">
-                        <option value="easy">מתחילים (4 אבנים)</option>
-                        <option value="hard">מקצוענים (6 אבנים)</option>
-                    </select>
-                </div>
-                
-                <button type="submit" class="start-btn">התחל משחק</button>
-            </form>
-            
-            <div class="extra-links">
-                <a href="pages/instructions.html" class="instr-link">איך משחקים? (הוראות)</a>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>מנקלה - פרויקט פיתוח 2026</p>
-    </footer>
-    
+    <h1 class="main-title">משחק המנקלה</h1>
+    <section id="section" class="login-container">
+        <h2>כניסה למשחק</h2>
+        <form id="login-form">
+            <input type="text" id="username" placeholder="שם השחקן" required>
+            <select id="level">
+                <option value="easy">מתחילים (4 אבנים)</option>
+                <option value="hard">מומחים (6 אבנים)</option>
+            </select>
+            <button type="submit" class="start-btn">התחל משחק</button>
+        </form>
+        <div style="margin-top: 25px;">
+            <a href="pages/instructions.html" style="color: #8b4513; font-weight: bold;">איך משחקים?</a>
+        </div>
+    </section>
     <script src="scripts/main.js"></script>
 </body>
 </html>
