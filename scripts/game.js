@@ -201,8 +201,8 @@ const saveAndShowResult = () => {
     button.style.width = 'auto';
     button.style.padding = '10px 20px';
     button.style.marginTop = '10px';
-    button.textContent = 'חזרה ללוח שיאים';
-    button.addEventListener('click', () => window.location.href = '../index.html');
+    button.textContent = 'עבור לשיאים';
+    button.addEventListener('click', () => window.location.href = '../pages/scores.html');
     status.appendChild(button);
 };
 
