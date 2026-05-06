@@ -8,32 +8,44 @@
 <body class="game-page">
     <header>
         <h1>משחק מנקלה</h1>
-        <div id="status-area">תור: <span id="current-player-name">טוען...</span></div>
+        <nav>
+            <a href="../index.html">בית</a>
+            <a href="instructions.html">הוראות</a>
+            <a href="scores.html">שיאים</a>
+        </nav>
     </header>
 
-    <main class="game-wrapper">
-        <div class="mancala-board">
-            <div class="store" id="store-p2"></div> <div class="pits-container">
-                <div class="row"> <div class="pit" data-index="12"></div>
-                    <div class="pit" data-index="11"></div>
-                    <div class="pit" data-index="10"></div>
-                    <div class="pit" data-index="9"></div>
-                    <div class="pit" data-index="8"></div>
-                    <div class="pit" data-index="7"></div>
+    <main>
+        <div id="status-area">תור: <span id="current-player-name">טוען...</span></div>
+
+        <div class="game-wrapper">
+            <div class="mancala-board">
+                <div class="store" id="store-p2"></div> <div class="pits-container">
+                    <div class="row"> <div class="pit" data-index="12"></div>
+                        <div class="pit" data-index="11"></div>
+                        <div class="pit" data-index="10"></div>
+                        <div class="pit" data-index="9"></div>
+                        <div class="pit" data-index="8"></div>
+                        <div class="pit" data-index="7"></div>
+                    </div>
+                    <div class="row"> <div class="pit" data-index="0"></div>
+                        <div class="pit" data-index="1"></div>
+                        <div class="pit" data-index="2"></div>
+                        <div class="pit" data-index="3"></div>
+                        <div class="pit" data-index="4"></div>
+                        <div class="pit" data-index="5"></div>
+                    </div>
                 </div>
-                <div class="row"> <div class="pit" data-index="0"></div>
-                    <div class="pit" data-index="1"></div>
-                    <div class="pit" data-index="2"></div>
-                    <div class="pit" data-index="3"></div>
-                    <div class="pit" data-index="4"></div>
-                    <div class="pit" data-index="5"></div>
-                </div>
-            </div>
-            
-            <div class="store" id="store-p1"></div> </div>
-        <button onclick="window.location.href='../index.html'" style="margin-top:20px;">יציאה</button>
+                
+                <div class="store" id="store-p1"></div> </div>
+<button id="exit-btn" class="secondary-btn" style="margin-top:20px;">יציאה</button>
+        </div>
     </main>
 
-    <script src="../scripts/game.js"></script>
+    <footer>
+        <p>&copy; 2026 משחק המנקלה</p>
+    </footer>
+
+    <script type="module" src="../scripts/game.js"></script>
 </body>
 </html>

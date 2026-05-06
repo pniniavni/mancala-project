@@ -6,7 +6,14 @@
     <link rel="stylesheet" href="../styles/main.css">
 </head>
 <body>
-    <header><h1>איך משחקים?</h1></header>
+    <header>
+        <h1>איך משחקים?</h1>
+        <nav>
+            <a href="../index.html">בית</a>
+            <a href="game.html">משחק</a>
+            <a href="scores.html">שיאים</a>
+        </nav>
+    </header>
     <main class="instructions-container">
         <section class="instruction-step">
             <img src="../images/MANCALA01.png" class="instruction-img">
@@ -36,25 +43,9 @@
         
         <button onclick="window.location.href='../index.html'" class="start-btn">הבנתי, בואו נשחק!</button>
     </main>
- <script>
-    const instructionsMusic = new Audio('../sound/forGame.mp3');
-    instructionsMusic.loop = true;
-    instructionsMusic.volume = 1.0;
-
-    // פונקציה להפעלה מיידית
-    const startMusicQuickly = () => {
-        instructionsMusic.play().catch(e => console.log("Waiting for interaction..."));
-        
-        // ברגע שהצלחנו לנגן, נסיר את כל המאזינים כדי לא להעמיס
-        const events = ['click', 'mousedown', 'keydown', 'touchstart'];
-        events.forEach(event => document.removeEventListener(event, startMusicQuickly));
-    };
-
-    // האזנה לכל סוג של אינטראקציה (עמידה בדרישת "אירועים נוספים")
-    ['click', 'mousedown', 'keydown', 'touchstart'].forEach(event => {
-        document.addEventListener(event, startMusicQuickly);
-    });
-</script>
-</script>
+    <footer>
+        <p>&copy; 2026 משחק המנקלה</p>
+    </footer>
+    <script src="../scripts/instructions.js"></script>
 </body>
 </html>

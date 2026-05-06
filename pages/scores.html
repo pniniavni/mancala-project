@@ -6,8 +6,15 @@
     <link rel="stylesheet" href="../styles/main.css">
 </head>
 <body>
-    <h1>טבלת המנצחים</h1>
-    <div class="scores-container">
+    <header>
+        <h1>טבלת המנצחים</h1>
+        <nav>
+            <a href="../index.html">בית</a>
+            <a href="instructions.html">הוראות</a>
+            <a href="game.html">משחק</a>
+        </nav>
+    </header>
+    <main class="scores-container">
         <table id="scores-table">
             <thead>
                 <tr>
@@ -19,8 +26,11 @@
             <tbody id="scores-body">
                 </tbody>
         </table>
-        <button onclick="window.location.href='../index.html'">חזרה</button>
-    </div>
+        <button class="secondary-btn" onclick="window.location.href='../index.html'">חזרה</button>
+    </main>
+    <footer>
+        <p>&copy; 2026 משחק המנקלה</p>
+    </footer>
     <script src="../scripts/scores.js"></script>
 </body>
 </html>

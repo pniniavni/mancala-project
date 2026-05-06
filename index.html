@@ -6,6 +6,12 @@
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body class="home-page">
+    <header>
+        <nav>
+            <a href="pages/instructions.html">הוראות</a>
+            <a href="pages/scores.html">שיאים</a>
+        </nav>
+    </header>
     <div class="glass-container">
         <h1 class="main-title">משחק המנקלה</h1>
         
@@ -14,7 +20,8 @@
                 <input type="text" id="p1-name" placeholder="שם שחקן 1" required>
                 
                 <select id="level-select">
-                    <option value="ai">נגד המחשב (קשה)</option>
+                    <option value="easy">נגד המחשב (קל)</option>
+                    <option value="hard">נגד המחשב (קשה)</option>
                     <option value="human">נגד חבר (שני שחקנים)</option>
                 </select>
 
@@ -22,47 +29,10 @@
             </div>
             <button type="submit" class="start-btn">התחל משחק</button>
         </form>
-
-        <div class="scores-section" id="records-table">
-            <h3>🏆 טבלת שיאים 🏆</h3>
-            <table>
-                <thead>
-                    <tr><th>שחקן</th><th>שיא</th><th>תאריך</th></tr>
-                </thead>
-                <tbody id="scores-body"></tbody>
-            </table>
-        </div>
     </div>
-
-    <script>
-        // הצגת/הסתרת שם שחקן 2 לפי הבחירה
-        const levelSelect = document.getElementById('level-select');
-        const p2Input = document.getElementById('p2-name');
-        
-        levelSelect.addEventListener('change', () => {
-            p2Input.style.display = levelSelect.value === 'human' ? 'block' : 'none';
-            if (levelSelect.value === 'human') p2Input.required = true;
-            else p2Input.required = false;
-        });
-
-        document.getElementById('login-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const data = {
-                p1: document.getElementById('p1-name').value,
-                p2: p2Input.value || "מחשב",
-                mode: levelSelect.value
-            };
-            localStorage.setItem('mancala_players', JSON.stringify(data));
-            window.location.href = 'pages/game.html';
-        });
-
-        // טעינת שיאים לטבלה
-        const results = JSON.parse(localStorage.getItem('mancala_results') || "[]");
-        const body = document.getElementById('scores-body');
-        results.forEach(res => {
-            const row = `<tr><td>${res.player}</td><td>${res.score}</td><td>${res.date}</td></tr>`;
-            body.innerHTML += row;
-        });
-    </script>
+    <footer>
+        <p>&copy; 2026 משחק המנקלה</p>
+    </footer>
+    <script type="module" src="scripts/index.js"></script>
 </body>
 </html>
