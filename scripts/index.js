@@ -18,9 +18,21 @@ const handleLevelChange = () => {
  */
 const handleFormSubmit = (e) => {
     e.preventDefault();
-    const p1Name = document.getElementById('p1-name').value;
+    
+    // שליפת הערכים מהשדות
+    const p1Input = document.getElementById('p1-name').value.trim();
+    const p2Input = document.getElementById('p2-name').value.trim();
     const level = document.getElementById('level-select').value;
-    const p2Name = document.getElementById('p2-name').value || "מחשב";
+
+    // כאן הקסם: אם המשתמש לא הקליד כלום (שדה ריק), נשתמש בשם ברירת מחדל
+    const p1Name = p1Input || "שחקן 1";
+    
+    let p2Name;
+    if (level === 'human') {
+        p2Name = p2Input || "שחקן 2"; // אם זה נגד חבר והשדה ריק
+    } else {
+        p2Name = "מחשב"; // אם זה נגד המחשב
+    }
 
     const data = { p1: p1Name, p2: p2Name, mode: level };
     localStorage.setItem('mancala_players', JSON.stringify(data));
@@ -29,9 +41,6 @@ const handleFormSubmit = (e) => {
     const params = new URLSearchParams({ level });
     window.location.href = `pages/game.html?${params}`;
 };
-
-
-
 export const getSavedPlayers = () => JSON.parse(localStorage.getItem('mancala_players') || "{}");
 
 document.addEventListener('DOMContentLoaded', () => {
